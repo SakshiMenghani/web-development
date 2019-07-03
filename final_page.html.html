@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>List of news </title>
+    <!-- Bootstrap CSS -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Get live headlines and images in JSON format from over 30,000 news sources including BBC News, CNN, the New York Times...">
+    <meta name="keywords" content="news api, api, news headlines">
+
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="List of news source APIs available - News API">
+    <meta itemprop="description" content="Get live headlines and images in JSON format from over 30,000 news sources including BBC News, CNN, the New York Times...">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="List of news source APIs available - News API">
+    <meta name="twitter:description" content="Get live headlines and images in JSON format from over 30,000 news sources including BBC News, CNN, the New York Times...">
+    <meta name="twitter:site" content="@NewsAPIorg">
+    <meta name="twitter:creator" content="@NewsAPIorg">
+    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+    <meta name="og:title" content="List of news source APIs available - News API">
+   
+    <meta name="og:url" content="https://newsapi.org">
+    <meta name="og:site_name" content="News API">
+    <meta name="og:locale" content="en_US">
+    <meta name="og:type" content="website">
+
+    <link rel="canonical" href="https://newsapi.org/sources">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.9.0/tachyons.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Bree+Serif" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-jsonview/1.2.3/jquery.jsonview.min.css" />
+    <style>.jsonview .prop { color:#000; }</style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Ladda/1.0.5/ladda-themeless.min.css" />
+    <link rel="stylesheet" href="/css/v2.css?v=1.0.7089.22216" />
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','/js/catynials.js','ga');
+
+        ga('create', 'UA-17563040-17', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91285317-5"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-91285317-5');
+    </script>
+
+</head>
+<body class="black-60 ma0">
+    <div class="center-l fixed left-0 mh3 mw6-l w-third-l right-0 top-1 z-5" id="alert-container">
+        
+    </div>
+
+    
+
+
+
+
+<!-- Top navbar & branding -->
+<header class="pv3 pv4-l bb b--black-10 fixed top-0 left-0 right-0 " style="z-index:10;background-color: #000000;color:#ffffff">
+    <div class="w-90 mw8 center flex justify-between items-center">
+    
+        <ul class="list mv0 pl0 flex items-center">
+            <li class="dn dib-l mr4">
+                <a class="no-underline color-inherit dim pv2" href="/docs/get-started">HOME</a>
+            </li>
+            <li class="dn dib-l mr4">
+                <a class="no-underline color-inherit dim pv2" href="/docs">ABOUT US</a>
+            </li>
+            <li class="dn dib-l mr4">
+                <a class="no-underline color-inherit dim pv2" href="/sources">CONTACT US</a>
+            </li>
+           
+            <li class="dn-l dib ml4">
+                <button id="open-menu-btn" class="color-inherit bn bg-white db f2 ph1 pv0">
+                    <i class="fa fa-bars"></i>
+                </button>                
+                <div class="bg-white bb b--black-20 pa2 fixed left-0 right-0 h-100" id="menu" style="overflow:auto; top:-120%; transition: all 500ms ease-in-out; z-index:20">
+                    <div class="absolute top-2 right-2">
+                        <button id="close-menu-btn" class="color-inherit bn bg-white db f2 ph1 pv0">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                   
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+<!-- END Top navbar & branding -->
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '#open-menu-btn', function () {
+            $('#menu').css('top', '0');
+        })
+        $(document).on('click', '#close-menu-btn', function () {
+            $('#menu').css('top', '-100%');
+        })
+    });
+</script>
+
+
+<main class="mv5 pt3 pt5-l">
+    
+    <div class="mw7 w-90 center lh-copy">
+
+        <h1 class="black-90 fw3">News sources</h1>
+
+        <style>
+            .source-tabs a {
+                align-items: center;
+                background: rgba(0,0,0,0.05);
+                bottom: -1px;
+                border-radius: 3px 3px 0 0;
+                border-left: 1px solid;
+                border-top: 1px solid;
+                border-right: 1px solid;
+                border-color: rgba(0,0,0,0.1);
+                color: inherit;
+                cursor: pointer;
+                display: flex;
+                height: 100%;
+                justify-content: center;
+                padding: 0.5rem 0;
+                position: relative;
+            }
+
+                .source-tabs a.selected {
+                    background: #fff;
+                    font-weight: 500;
+                }
+
+            .countries-and-categories, .publishers {
+                display: none;
+            }
+
+                .countries-and-categories.selected, .publishers.selected {
+                    display: block;
+                }
+                .fixed-header{
+        width: 100%;
+        position: fixed;        
+        background: #333;
+        padding: 10px 0;
+        color: #fff;
+    }
+   #footer
+   {
+      height: 50px;
+      background-color:black;
+      padding: 200px ;
+      margin-top: 1830px;
+
+   }
+  h1
+   {
+     margin: 0 auto;
+      color: #333;
+      text-align: center;
+      
+}
+h2
+{
+
+      color: #333;
+      text-align: center;
+}
+        </style>
+        <script>
+        $(document).ready(function () {
+            $('.source-tabs a').on('click', function () {
+                $('.source-tabs a').removeClass('selected');
+                $('.countries-and-categories, .publishers').removeClass('selected');
+
+                const $this = $(this);
+
+                $this.addClass('selected');
+                $('.' + $this.data('btn-for')).addClass('selected');
+            })
+        })
+        </script>
+
+        <div class="bb b--black-10 flex source-tabs">
+           
+        </div>
+
+        <div class="countries-and-categories">
+            <p class="pb4">We curate a list of top headlines for a range of countries. You can click through for integration examples.</p>
+
+            <div class="sources-container mb4 center relative">
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/argentina-news-api" title="Argentina">
+                            <img alt="Argentina flag" class="icon" data-src="/images/flags/ar.svg" />
+                            <div class="name f3" title="Argentina">
+                                Argentina
+                            </div>
+                            <div><kbd title="id: ar">ar</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/australia-news-api" title="Australia">
+                            <img alt="Australia flag" class="icon" data-src="/images/flags/au.svg" />
+                            <div class="name f3" title="Australia">
+                                Australia
+                            </div>
+                            <div><kbd title="id: au">au</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/austria-news-api" title="Austria">
+                            <img alt="Austria flag" class="icon" data-src="/images/flags/at.svg" />
+                            <div class="name f3" title="Austria">
+                                Austria
+                            </div>
+                            <div><kbd title="id: at">at</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/belgium-news-api" title="Belgium">
+                            <img alt="Belgium flag" class="icon" data-src="/images/flags/be.svg" />
+                            <div class="name f3" title="Belgium">
+                                Belgium
+                            </div>
+                            <div><kbd title="id: be">be</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/brazil-news-api" title="Brazil">
+                            <img alt="Brazil flag" class="icon" data-src="/images/flags/br.svg" />
+                            <div class="name f3" title="Brazil">
+                                Brazil
+                            </div>
+                            <div><kbd title="id: br">br</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/bulgaria-news-api" title="Bulgaria">
+                            <img alt="Bulgaria flag" class="icon" data-src="/images/flags/bg.svg" />
+                            <div class="name f3" title="Bulgaria">
+                                Bulgaria
+                            </div>
+                            <div><kbd title="id: bg">bg</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/canada-news-api" title="Canada">
+                            <img alt="Canada flag" class="icon" data-src="/images/flags/ca.svg" />
+                            <div class="name f3" title="Canada">
+                                Canada
+                            </div>
+                            <div><kbd title="id: ca">ca</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/china-news-api" title="China">
+                            <img alt="China flag" class="icon" data-src="/images/flags/cn.svg" />
+                            <div class="name f3" title="China">
+                                China
+                            </div>
+                            <div><kbd title="id: cn">cn</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/colombia-news-api" title="Colombia">
+                            <img alt="Colombia flag" class="icon" data-src="/images/flags/co.svg" />
+                            <div class="name f3" title="Colombia">
+                                Colombia
+                            </div>
+                            <div><kbd title="id: co">co</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/cuba-news-api" title="Cuba">
+                            <img alt="Cuba flag" class="icon" data-src="/images/flags/cu.svg" />
+                            <div class="name f3" title="Cuba">
+                                Cuba
+                            </div>
+                            <div><kbd title="id: cu">cu</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/czech-republic-news-api" title="Czech Republic">
+                            <img alt="Czech Republic flag" class="icon" data-src="/images/flags/cz.svg" />
+                            <div class="name f3" title="Czech Republic">
+                                Czech Republic
+                            </div>
+                            <div><kbd title="id: cz">cz</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/egypt-news-api" title="Egypt">
+                            <img alt="Egypt flag" class="icon" data-src="/images/flags/eg.svg" />
+                            <div class="name f3" title="Egypt">
+                                Egypt
+                            </div>
+                            <div><kbd title="id: eg">eg</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/france-news-api" title="France">
+                            <img alt="France flag" class="icon" data-src="/images/flags/fr.svg" />
+                            <div class="name f3" title="France">
+                                France
+                            </div>
+                            <div><kbd title="id: fr">fr</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/germany-news-api" title="Germany">
+                            <img alt="Germany flag" class="icon" data-src="/images/flags/de.svg" />
+                            <div class="name f3" title="Germany">
+                                Germany
+                            </div>
+                            <div><kbd title="id: de">de</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/greece-news-api" title="Greece">
+                            <img alt="Greece flag" class="icon" data-src="/images/flags/gr.svg" />
+                            <div class="name f3" title="Greece">
+                                Greece
+                            </div>
+                            <div><kbd title="id: gr">gr</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/hong-kong-news-api" title="Hong Kong">
+                            <img alt="Hong Kong flag" class="icon" data-src="/images/flags/hk.svg" />
+                            <div class="name f3" title="Hong Kong">
+                                Hong Kong
+                            </div>
+                            <div><kbd title="id: hk">hk</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/hungary-news-api" title="Hungary">
+                            <img alt="Hungary flag" class="icon" data-src="/images/flags/hu.svg" />
+                            <div class="name f3" title="Hungary">
+                                Hungary
+                            </div>
+                            <div><kbd title="id: hu">hu</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/india-news-api" title="India">
+                            <img alt="India flag" class="icon" data-src="/images/flags/in.svg" />
+                            <div class="name f3" title="India">
+                                India
+                            </div>
+                            <div><kbd title="id: in">in</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/indonesia-news-api" title="Indonesia">
+                            <img alt="Indonesia flag" class="icon" data-src="/images/flags/id.svg" />
+                            <div class="name f3" title="Indonesia">
+                                Indonesia
+                            </div>
+                            <div><kbd title="id: id">id</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/ireland-news-api" title="Ireland">
+                            <img alt="Ireland flag" class="icon" data-src="/images/flags/ie.svg" />
+                            <div class="name f3" title="Ireland">
+                                Ireland
+                            </div>
+                            <div><kbd title="id: ie">ie</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/israel-news-api" title="Israel">
+                            <img alt="Israel flag" class="icon" data-src="/images/flags/il.svg" />
+                            <div class="name f3" title="Israel">
+                                Israel
+                            </div>
+                            <div><kbd title="id: il">il</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/italy-news-api" title="Italy">
+                            <img alt="Italy flag" class="icon" data-src="/images/flags/it.svg" />
+                            <div class="name f3" title="Italy">
+                                Italy
+                                
+                            </div>
+                            <div><kbd title="id: it">it</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/japan-news-api" title="Japan">
+                            <img alt="Japan flag" class="icon" data-src="/images/flags/jp.svg" />
+                            <div class="name f3" title="Japan">
+                                Japan
+                            </div>
+                            <div><kbd title="id: jp">jp</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/latvia-news-api" title="Latvia">
+                            <img alt="Latvia flag" class="icon" data-src="/images/flags/lv.svg" />
+                            <div class="name f3" title="Latvia">
+                                Latvia
+                            </div>
+                            <div><kbd title="id: lv">lv</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/lithuania-news-api" title="Lithuania">
+                            <img alt="Lithuania flag" class="icon" data-src="/images/flags/lt.svg" />
+                            <div class="name f3" title="Lithuania">
+                                Lithuania
+                            </div>
+                            <div><kbd title="id: lt">lt</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/malaysia-news-api" title="Malaysia">
+                            <img alt="Malaysia flag" class="icon" data-src="/images/flags/my.svg" />
+                            <div class="name f3" title="Malaysia">
+                                Malaysia
+                            </div>
+                            <div><kbd title="id: my">my</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/mexico-news-api" title="Mexico">
+                            <img alt="Mexico flag" class="icon" data-src="/images/flags/mx.svg" />
+                            <div class="name f3" title="Mexico">
+                                Mexico
+                            </div>
+                            <div><kbd title="id: mx">mx</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/morocco-news-api" title="Morocco">
+                            <img alt="Morocco flag" class="icon" data-src="/images/flags/ma.svg" />
+                            <div class="name f3" title="Morocco">
+                                Morocco
+                            </div>
+                            <div><kbd title="id: ma">ma</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/netherlands-news-api" title="Netherlands">
+                            <img alt="Netherlands flag" class="icon" data-src="/images/flags/nl.svg" />
+                            <div class="name f3" title="Netherlands">
+                                Netherlands
+                            </div>
+                            <div><kbd title="id: nl">nl</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/new-zealand-news-api" title="New Zealand">
+                            <img alt="New Zealand flag" class="icon" data-src="/images/flags/nz.svg" />
+                            <div class="name f3" title="New Zealand">
+                                New Zealand
+                            </div>
+                            <div><kbd title="id: nz">nz</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/nigeria-news-api" title="Nigeria">
+                            <img alt="Nigeria flag" class="icon" data-src="/images/flags/ng.svg" />
+                            <div class="name f3" title="Nigeria">
+                                Nigeria
+                            </div>
+                            <div><kbd title="id: ng">ng</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/norway-news-api" title="Norway">
+                            <img alt="Norway flag" class="icon" data-src="/images/flags/no.svg" />
+                            <div class="name f3" title="Norway">
+                                Norway
+                            </div>
+                            <div><kbd title="id: no">no</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/philippines-news-api" title="Philippines">
+                            <img alt="Philippines flag" class="icon" data-src="/images/flags/ph.svg" />
+                            <div class="name f3" title="Philippines">
+                                Philippines
+                            </div>
+                            <div><kbd title="id: ph">ph</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/poland-news-api" title="Poland">
+                            <img alt="Poland flag" class="icon" data-src="/images/flags/pl.svg" />
+                            <div class="name f3" title="Poland">
+                                Poland
+                            </div>
+                            <div><kbd title="id: pl">pl</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/portugal-news-api" title="Portugal">
+                            <img alt="Portugal flag" class="icon" data-src="/images/flags/pt.svg" />
+                            <div class="name f3" title="Portugal">
+                                Portugal
+                            </div>
+                            <div><kbd title="id: pt">pt</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/romania-news-api" title="Romania">
+                            <img alt="Romania flag" class="icon" data-src="/images/flags/ro.svg" />
+                            <div class="name f3" title="Romania">
+                                Romania
+                            </div>
+                            <div><kbd title="id: ro">ro</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/russia-news-api" title="Russia">
+                            <img alt="Russia flag" class="icon" data-src="/images/flags/ru.svg" />
+                            <div class="name f3" title="Russia">
+                                Russia
+                            </div>
+                            <div><kbd title="id: ru">ru</kbd></div>
+
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/saudi-arabia-news-api" title="Saudi Arabia">
+                            <img alt="Saudi Arabia flag" class="icon" data-src="/images/flags/sa.svg" />
+                            <div class="name f3" title="Saudi Arabia">
+                                Saudi Arabia
+                            </div>
+                            <div><kbd title="id: sa">sa</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/serbia-news-api" title="Serbia">
+                            <img alt="Serbia flag" class="icon" data-src="/images/flags/rs.svg" />
+                            <div class="name f3" title="Serbia">
+                                Serbia
+                            </div>
+                            <div><kbd title="id: rs">rs</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/singapore-news-api" title="Singapore">
+                            <img alt="Singapore flag" class="icon" data-src="/images/flags/sg.svg" />
+                            <div class="name f3" title="Singapore">
+                                Singapore
+                            </div>
+                            <div><kbd title="id: sg">sg</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/slovakia-news-api" title="Slovakia">
+                            <img alt="Slovakia flag" class="icon" data-src="/images/flags/sk.svg" />
+                            <div class="name f3" title="Slovakia">
+                                Slovakia
+                            </div>
+                            <div><kbd title="id: sk">sk</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/slovenia-news-api" title="Slovenia">
+                            <img alt="Slovenia flag" class="icon" data-src="/images/flags/si.svg" />
+                            <div class="name f3" title="Slovenia">
+                                Slovenia
+                            </div>
+                            <div><kbd title="id: si">si</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/south-africa-news-api" title="South Africa">
+                            <img alt="South Africa flag" class="icon" data-src="/images/flags/za.svg" />
+                            <div class="name f3" title="South Africa">
+                                South Africa
+                            </div>
+                            <div><kbd title="id: za">za</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/south-korea-news-api" title="South Korea">
+                            <img alt="South Korea flag" class="icon" data-src="/images/flags/kr.svg" />
+                            <div class="name f3" title="South Korea">
+                                South Korea
+                            </div>
+                            <div><kbd title="id: kr">kr</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/sweden-news-api" title="Sweden">
+                            <img alt="Sweden flag" class="icon" data-src="/images/flags/se.svg" />
+                            <div class="name f3" title="Sweden">
+                                Sweden
+                            </div>
+                            <div><kbd title="id: se">se</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/switzerland-news-api" title="Switzerland">
+                            <img alt="Switzerland flag" class="icon" data-src="/images/flags/ch.svg" />
+                            <div class="name f3" title="Switzerland">
+                                Switzerland
+                            </div>
+                            <div><kbd title="id: ch">ch</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/taiwan-news-api" title="Taiwan">
+                            <img alt="Taiwan flag" class="icon" data-src="/images/flags/tw.svg" />
+                            <div class="name f3" title="Taiwan">
+                                Taiwan
+                            </div>
+                            <div><kbd title="id: tw">tw</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/thailand-news-api" title="Thailand">
+                            <img alt="Thailand flag" class="icon" data-src="/images/flags/th.svg" />
+                            <div class="name f3" title="Thailand">
+                                Thailand
+                            </div>
+                            <div><kbd title="id: th">th</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/turkey-news-api" title="Turkey">
+                            <img alt="Turkey flag" class="icon" data-src="/images/flags/tr.svg" />
+                            <div class="name f3" title="Turkey">
+                                Turkey
+                            </div>
+                            <div><kbd title="id: tr">tr</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/uae-news-api" title="UAE">
+                            <img alt="UAE flag" class="icon" data-src="/images/flags/ae.svg" />
+                            <div class="name f3" title="UAE">
+                                UAE
+                            </div>
+                            <div><kbd title="id: ae">ae</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/ukraine-news-api" title="Ukraine">
+                            <img alt="Ukraine flag" class="icon" data-src="/images/flags/ua.svg" />
+                            <div class="name f3" title="Ukraine">
+                                Ukraine
+                            </div>
+                            <div><kbd title="id: ua">ua</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/uk-news-api" title="United Kingdom">
+                            <img alt="United Kingdom flag" class="icon" data-src="/images/flags/gb.svg" />
+                            <div class="name f3" title="United Kingdom">
+                                United Kingdom
+                            </div>
+                            <div><kbd title="id: gb">gb</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/us-news-api" title="United States">
+                            <img alt="United States flag" class="icon" data-src="/images/flags/us.svg" />
+                            <div class="name f3" title="United States">
+                                United States
+                            </div>
+                            <div><kbd title="id: us">us</kbd></div>
+                        </a>
+                    </div>
+                    <div class="source fl-l w-50-l mb2">
+                        <a class="db no-underline grow" href="/s/venuzuela-news-api" title="Venuzuela">
+                            <img alt="Venuzuela flag" class="icon" data-src="/images/flags/ve.svg" />
+                            <div class="name f3" title="Venuzuela">
+                                Venuzuela
+                            </div>
+                            <div><kbd title="id: ve">ve</kbd></div>
+                        </a>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="publishers selected">
+        <div class="mw7 w-90 center lh-copy">
+            <p>We crawl and index news articles from over 30,000 news sources and blogs. We also monitor the top and breaking news headlines from the following 135 of the most notable of these sources.</p>
+
+            <div class="ba b--black-10 f3 mb4">
+                <div class="flex items-center bb b--black-10">
+                    <i class="fa fa-search w-10 tc"></i>
+                    <input class="bn bl b--black-10 pa2 w-90" id="source-search-box" type="text" />
+                </div>
+            </div>
+        </div>
+
+<script type="text/javascript">
+function demo(x)
+{
+ $("#a").click(function(){
+   $("#b").toggle(100);
+
+ }); 
+
+ $("#c").click(function(){
+   $("#d").toggle(1000);
+
+ }); 
+
+ $("#e").click(function(){
+   $("#f").toggle(1000);
+
+ }); 
+
+ $("#g").click(function(){
+   $("#h").toggle(1000);
+
+ }); 
+
+ $("#i").click(function(){
+   $("#j").toggle(1000);
+
+ }); 
+
+ $("#k").click(function(){
+   $("#l").toggle(1000);
+
+ }); 
+
+ $("#m").click(function(){
+   $("#n").toggle(1000);
+
+ }); 
+
+ $("#o").click(function(){
+   $("#p").toggle(1000);
+
+ }); 
+ $("#q").click(function(){
+   $("#r").toggle(1000);
+
+ }); 
+ $("#s").click(function(){
+   $("#t").toggle(1000);
+
+ }); 
+ $("#u").click(function(){
+   $("#v").toggle(1000);
+
+ }); 
+ $("#w").click(function(){
+   $("#x").toggle(1000);
+
+ }); 
+ $("#y").click(function(){
+   $("#z").toggle(1000);
+
+ }); 
+ 
+}
+</script>
+
+        <div class="sources-container mb4 center ph3 relative">
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="ABC News" data-country="us" data-language="en" data-category="general">
+                      <div class="db grow" title="ABC News">
+                        <img alt="ABC News" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=https://abcnews.go.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="ABC News">
+                         <button href="#" onclick="demo(1)" id="a">ABC News</button> 
+                         <p id="b" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>
+                        </div>
+                        <div><kbd title="id: abc-news">abc-news</kbd></div>
+                      </div>
+                    </div>
+                    
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Al Jazeera English" data-country="us" data-language="en" data-category="general">
+                      <div class="db grow" title="Al Jazeera English">
+                        <img alt="Al Jazeera English" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.aljazeera.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Al Jazeera English">
+                          <button href="#" onclick="demo(1)" id="c">Al Jazeera English</button>
+                          <p id="d" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>
+                        </div>
+                        <div><kbd title="id: al-jazeera-english">al-jazeera-english</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="ANSA.it" data-country="it" data-language="it" data-category="general">
+                      <div class="db grow" title="ANSA.it">
+                        <img alt="ANSA.it" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.ansa.it&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="ANSA.it">
+                          <button href="#" onclick="demo(1)" id="e"> ANSA.it</button>
+                          <p id="f" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>
+                        </div>
+                        <div><kbd title="id: ansa">ansa</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Argaam" data-country="sa" data-language="ar" data-category="business">
+                      <div class="db grow" title="Argaam">
+                        <img alt="Argaam" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.argaam.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Argaam">
+                          <button href="#" onclick="demo(1)" id="g">Argaam</button>
+                          <p id="h" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p> 
+                        </div>
+                        <div><kbd title="id: argaam">argaam</kbd></div>
+                      </div>
+                    </div>
+                   
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Ary News" data-country="pk" data-language="ud" data-category="general">
+                      <div class="db grow" title="Ary News">
+                        <img alt="Ary News" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=https://arynews.tv/ud/&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Ary News">
+                          <button href="#" onclick="demo(1)" id="i">Ary News</button>
+                          <p id="j" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p> 
+                        </div>
+                        <div><kbd title="id: ary-news">ary-news</kbd></div>
+                      </div>
+                    </div>
+                   
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Australian Financial Review" data-country="au" data-language="en" data-category="business">
+                      <div class="db grow" title="Australian Financial Review">
+                        <img alt="Australian Financial Review" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.afr.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Australian Financial Review">
+                          <button href="#" onclick="demo(1)" id="k"> Australian Financial Review</button>
+                          <p id="l" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p> 
+                        </div>
+                        <div><kbd title="id: australian-financial-review">australian-financial-review</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Axios" data-country="us" data-language="en" data-category="general">
+                      <div class="db grow" title="Axios">
+                        <img alt="Axios" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=https://www.axios.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Axios">
+                          <button href="#" onclick="demo(1)" id="m"> Axios</button>
+                          <p id="n" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p> 
+                        </div>
+                        <div><kbd title="id: axios">axios</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="BBC News" data-country="gb" data-language="en" data-category="general">
+                      <div class="db grow" title="BBC News">
+                        <img alt="BBC News" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.bbc.co.uk/news&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="BBC News">
+                          <button href="#" onclick="demo(1)" id="o"> BBC News</button>
+                          <p id="p" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>     
+                        </div>
+                        <div><kbd title="id: bbc-news">bbc-news</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="BBC Sport" data-country="gb" data-language="en" data-category="sports">
+                      <div class="db grow" title="BBC Sport">
+                        <img alt="BBC Sport" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.bbc.co.uk/sport&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="BBC Sport">
+                          <button href="#" onclick="demo(1)" id="q"> BBC Sport</button>
+                          <p id="r" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>          
+                        </div>
+                        <div><kbd title="id: bbc-sport">bbc-sport</kbd></div>
+                      </div>
+                    </div>
+                   
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Blasting News (BR)" data-country="br" data-language="pt" data-category="general">
+                      <div class="db grow" title="Blasting News (BR)">
+                        <img alt="Blasting News (BR)" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://br.blastingnews.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Blasting News (BR)">
+                          <button href="#" onclick="demo(1)" id="s"> Blasting News (BR)</button>
+                          <p id="t" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>       
+                        </div>
+                        <div><kbd title="id: blasting-news-br">blasting-news-br</kbd></div>
+                      </div>
+                    </div>
+                    
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Bloomberg" data-country="us" data-language="en" data-category="business">
+                      <div class="db grow" title="Bloomberg">
+                        <img alt="Bloomberg" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.bloomberg.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Bloomberg">
+                          <button href="#" onclick="demo(1)" id="u"> Bloomberg</button>
+                          <p id="v" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>        
+                        </div>
+                        <div><kbd title="id: bloomberg">bloomberg</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Breitbart News" data-country="us" data-language="en" data-category="general">
+                      <div class="db grow" title="Breitbart News">
+                        <img alt="Breitbart News" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.breitbart.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Breitbart News">
+                          <button href="#" onclick="demo(1)" id="w"> Breitbart News</button>
+                          <p id="x" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>        
+                        </div>
+                        <div><kbd title="id: breitbart-news">breitbart-news</kbd></div>
+                      </div>
+                    </div>
+                    
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Buzzfeed" data-country="us" data-language="en" data-category="entertainment">
+                      <div class="db grow" title="Buzzfeed">
+                        <img alt="Buzzfeed" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=https://www.buzzfeed.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Buzzfeed">
+                          <button href="#" onclick="demo(1)" id="y"> Buzzfeed</button>
+
+                          <p id="z" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>       
+                        </div>
+                        <div><kbd title="id: buzzfeed">buzzfeed</kbd></div>
+                      </div>
+                    </div>
+                    
+                    
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="CNBC" data-country="us" data-language="en" data-category="business">
+                      <div class="db grow" title="CNBC">
+                        <img alt="CNBC" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.cnbc.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="CNBC">
+                          CNBC
+                          <p id="n" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p> 
+                          <p id="n" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p> 
+                        </div>
+                        <div><kbd title="id: cnbc">cnbc</kbd></div>
+                      </div>
+                    </div>
+                    
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="CNN Spanish" data-country="us" data-language="es" data-category="general">
+                      <div class="db grow" title="CNN Spanish">
+                        <img alt="CNN Spanish" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://cnnespanol.cnn.com/&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="CNN Spanish">
+                          CNN Spanish
+                          <p id="n" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p> 
+                        </div>
+                        <div><kbd title="id: cnn-es">cnn-es</kbd></div>
+                      </div>
+                    </div>
+                   
+                    
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Der Tagesspiegel" data-country="de" data-language="de" data-category="general">
+                      <div class="db grow" title="Der Tagesspiegel">
+                        <img alt="Der Tagesspiegel" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.tagesspiegel.de&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Der Tagesspiegel">
+                          Der Tagesspiegel
+                          <p id="n" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>              
+                        </div>
+                        <div><kbd title="id: der-tagesspiegel">der-tagesspiegel</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Die Zeit" data-country="de" data-language="de" data-category="business">
+                      <div class="db grow" title="Die Zeit">
+                        <img alt="Die Zeit" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.zeit.de/index&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Die Zeit">
+                          Die Zeit
+                          <p id="n" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>       
+                        </div>
+                        <div><kbd title="id: die-zeit">die-zeit</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="El Mundo" data-country="es" data-language="es" data-category="general">
+                      <div class="db grow" title="El Mundo">
+                        <img alt="El Mundo" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.elmundo.es&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="El Mundo">
+                          El Mundo
+                        </div>
+                        <div><kbd title="id: el-mundo">el-mundo</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Engadget" data-country="us" data-language="en" data-category="technology">
+                      <div class="db grow" title="Engadget">
+                        <img alt="Engadget" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=https://www.engadget.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Engadget">
+                          Engadget
+                        </div>
+                        <div><kbd title="id: engadget">engadget</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Entertainment Weekly" data-country="us" data-language="en" data-category="entertainment">
+                      <div class="db grow" title="Entertainment Weekly">
+                        <img alt="Entertainment Weekly" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.ew.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Entertainment Weekly">
+                          Entertainment Weekly
+                        </div>
+                        <div><kbd title="id: entertainment-weekly">entertainment-weekly</kbd></div>
+                      </div>
+                    </div>
+                   
+                   
+                   
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Football Italia" data-country="it" data-language="en" data-category="sports">
+                      <div class="db grow" title="Football Italia">
+                        <img alt="Football Italia" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.football-italia.net&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Football Italia">
+                          Football Italia
+                          <p id="n" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>                     
+                        </div>
+                        <div><kbd title="id: football-italia">football-italia</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Fortune" data-country="us" data-language="en" data-category="business">
+                      <div class="db grow" title="Fortune">
+                        <img alt="Fortune" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://fortune.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Fortune">
+                          Fortune
+                        </div>
+                        <div><kbd title="id: fortune">fortune</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="FourFourTwo" data-country="gb" data-language="en" data-category="sports">
+                      <div class="db grow" title="FourFourTwo">
+                        <img alt="FourFourTwo" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.fourfourtwo.com/news&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="FourFourTwo">
+                          FourFourTwo
+                        </div>
+                        <div><kbd title="id: four-four-two">four-four-two</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Fox News" data-country="us" data-language="en" data-category="general">
+                      <div class="db grow" title="Fox News">
+                        <img alt="Fox News" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.foxnews.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Fox News">
+                          Fox News
+                        </div>
+                        <div><kbd title="id: fox-news">fox-news</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Fox Sports" data-country="us" data-language="en" data-category="sports">
+                      <div class="db grow" title="Fox Sports">
+                        <img alt="Fox Sports" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.foxsports.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Fox Sports">
+                          Fox Sports
+                        </div>
+                        <div><kbd title="id: fox-sports">fox-sports</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Globo" data-country="br" data-language="pt" data-category="general">
+                      <div class="db grow" title="Globo">
+                        <img alt="Globo" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=http://www.globo.com/&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Globo">
+                          Globo
+                        </div>
+                        <div><kbd title="id: globo">globo</kbd></div>
+                      </div>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Google News" data-country="us" data-language="en" data-category="general">
+                      <a class="db no-underline grow" href="/s/google-news-api" title="Google News">
+                        <img alt="Google News" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=https://news.google.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Google News">
+                          Google News
+                        </div>
+                        <div><kbd title="id: google-news">google-news</kbd></div>
+                      </a>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Google News (Argentina)" data-country="ar" data-language="es" data-category="general">
+                      <a class="db no-underline grow" href="/s/google-news-ar-api" title="Google News (Argentina)">
+                        <img alt="Google News (Argentina)" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=https://news.google.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Google News (Argentina)">
+                          Google News (Argentina)
+                        </div>
+                        <div><kbd title="id: google-news-ar">google-news-ar</kbd></div>
+                      </a>
+                    </div>
+                    <div class="source publisher fl-ns w-25-l w-50-m mb2" data-name="Google News (Australia)" data-country="au" data-language="en" data-category="general">
+                      <a class="db no-underline grow" href="/s/google-news-au-api" title="Google News (Australia)">
+                        <img alt="Google News (Australia)" class="icon" data-src="https://icon-locator.herokuapp.com/icon?url=https://news.google.com&size=70..120..200" referrerpolicy="no-referrer" />
+                        <div class="name f3" title="Google News (Australia)">
+                          Google News (Australia)
+                          <p id="n" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus saepe in at, explicabo eaque, reiciendis iste sequi officia magnam sint excepturi ratione omnis modi fuga dolorem id debitis maxime.</p>                   
+                        </div>
+                        <div><kbd title="id: google-news-au">google-news-au</kbd></div>
+                      </a>
+                    </div>
+                   
+                    
+        </div>
+    </div>
+
+</main>
+
+
+
+    <script>
+        //const $blogLatestArticleTitle = $('#blog-latest-article-title');
+        //$.getJSON('https://newsapi.org/blog/feed/json', function (response) {
+        //    $blogLatestArticleTitle.text(response.items[0].title);
+        //    $blogLatestArticleTitle.attr('href', response.items[0].url);
+        //})
+    </script>
+    
+    
+<script>
+    $(document).ready(function () {
+        $('#source-search-box').on('keyup', function () {
+            filterSources();
+        })
+
+        function filterSources() {
+            let $sources = $('.publisher');
+            $sources.hide();
+
+            const $sourceSearchBox = $('#source-search-box');
+
+            // search box
+            const searchVal = $sourceSearchBox.val();
+            if (searchVal !== '') {
+                $sources = $sources.filter(function (id, el) {
+                    return $(el).data('name').toLowerCase().indexOf(searchVal.toLowerCase()) > -1;
+                })
+            }
+
+            $sources.show();
+        }
+    })
+</script>
+<script>
+    (function (w, d) {
+        var b = d.getElementsByTagName('body')[0];
+        var s = d.createElement("script"); s.async = true;
+        var v = !("IntersectionObserver" in w) ? "8.5.2" : "10.3.5";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/" + v + "/lazyload.min.js";
+        w.lazyLoadOptions = {}; // Your options here. See "recipes" for more information about async.
+        b.appendChild(s);
+    }(window, document));
+</script>
+
+    <script src="/js/jquery.jsonview.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Ladda/1.0.5/spin.min.js"></script>
+    <script src="/js/ladda.js"></script>
+    <script src="/js/v2.js?v=1.0.7089.22216"></script>
+  
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+</body>
+
+<div id="footer">
+
+  <h1>News About Every Field Is Provided Here.</h1>
+  <h2>for more enquries contact us on +91 7820230400.</h2>
+  
+
+</div>
+</html>
